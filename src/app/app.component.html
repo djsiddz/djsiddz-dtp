@@ -1,10 +1,3 @@
-<div class="container">
-  <div class="jumbotron mt-3">
-    <h1>{{title}}</h1>
-    <p class="lead">This example is a quick exercise to illustrate how the {{title}} works.</p>
-    <!-- <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a> -->
-  </div>
-</div>
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="#">djsiddz-dtp</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Get Started</a>
+        <a class="nav-link" routerLink="get-started">Get Started</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Github</a>
@@ -35,31 +28,5 @@
     </ul>
   </div>
 </nav>
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Only Date</h5>
-          <!-- <djsiddz-dtp label="Date" [showDate]="true" [showTime]="false"></djsiddz-dtp> -->
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Only Time</h5>
-          <!-- <djsiddz-dtp label="Time" [showDate]="false" [showTime]="true"></djsiddz-dtp> -->
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Date & Time</h5>
-          <!-- <djsiddz-dtp label="Both" [showDate]="true" [showTime]="true"></djsiddz-dtp> -->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+<router-outlet></router-outlet>
