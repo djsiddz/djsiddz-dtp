@@ -1,0 +1,4 @@
+.card-popup {
+  position: absolute;
+  z-index: 1001;
+}
