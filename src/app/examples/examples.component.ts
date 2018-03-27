@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'djsiddz-examples',
@@ -8,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
 export class ExamplesComponent implements OnInit {
 
   title = 'Date Time Picker';
+  // using ngModel example
+  example1 = new Date(2017,1,5,10,30);
+  // using formControlName example
+  // example2 = new Date(2017,1,5,10,30);
 
-  constructor() { }
+  form: FormGroup;
+
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      example2: new Date(2017,1,5,10,30)
+    });
   }
 
 }

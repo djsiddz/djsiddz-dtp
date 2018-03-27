@@ -32,4 +32,24 @@
       </div>
     </div>
   </div>
+  <div class="row mt-3">
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Using ngModel</h5>
+          <djsiddz-dtp label="Both" [showDate]="true" [showTime]="true" [(ngModel)]="example1"></djsiddz-dtp>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Using formControlName</h5>
+          <form [formGroup]="form">
+            <djsiddz-dtp label="Both" [showDate]="true" [showTime]="true" formControlName="example2"></djsiddz-dtp>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

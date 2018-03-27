@@ -1,6 +1,6 @@
 <!-- <div class="form-group"> -->
   <label for="exampleFormControlInput1">{{label}}</label>
-  <input type="text" class="form-control" [(ngModel)]="selectedFinalDate" (click)="togglePicker()"/>
+  <input type="text" class="form-control" [(ngModel)]="_finalDate" (click)="togglePicker()"/>
   <div class="card card-popup" *ngIf="showPicker">
     <div class="card-body">
       <div class="d-flex justify-content-between" *ngIf="showDate">
@@ -40,7 +40,7 @@
           </select>
         </div>
         <div class="px-1 ml-auto align-self-end">
-          <button type="button" name="button" class="btn btn-primary" (click)="setDate()">OK</button>
+          <button type="button" name="button" class="btn btn-primary" (click)="togglePicker()">OK</button>
         </div>
       </div>
     </div>

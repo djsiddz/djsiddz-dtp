@@ -1,18 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnChanges, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MonthOptions, DateOptions, YearOptions, HourOptions, MinutesOptions } from './dtp.model';
 @Component({
   selector: 'djsiddz-dtp',
   templateUrl: './dtp.component.html',
-  styleUrls: ['./dtp.component.css']
+  styleUrls: ['./dtp.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DtpComponent),
+      multi: true
+    }
+  ]
 })
-export class DtpComponent implements OnInit {
+export class DtpComponent implements OnChanges, ControlValueAccessor {
 
   @Input() showDate: Boolean = false;
   @Input() showTime: Boolean = false;
   @Input() label: String;
 
-  defaultDate : Date;
+  @Input() _finalDate : Date = new Date();
 
   showPicker = false;
   selectedMonth: number;
@@ -20,7 +27,6 @@ export class DtpComponent implements OnInit {
   selectedYear: number;
   selectedHour: number;
   selectedMinute: number;
-  selectedFinalDate: Date;
 
   monthOptions = MonthOptions;
   dateOptions = DateOptions;
@@ -30,13 +36,25 @@ export class DtpComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    this.defaultDate = new Date();
-    this.selectedMonth =  this.defaultDate.getMonth();
-    this.selectedDate = this.defaultDate.getDate();
-    this.selectedYear = this.defaultDate.getFullYear();
-    this.selectedHour = this.defaultDate.getHours();;
-    this.selectedMinute = this.defaultDate.getMinutes();
+  // overriding functions for ControlValueAccessor
+  writeValue(value: any) {
+    if (value !== undefined) {
+      this._finalDate = value;
+    }
+  }
+  propagateChange = (_: any) => {};
+  registerOnChange(fn) {
+    this.propagateChange = fn;
+  }
+  registerOnTouched() {}
+  // overriding END
+
+  ngOnChanges() {
+    this.selectedMonth =  this._finalDate.getMonth();
+    this.selectedDate = this._finalDate.getDate();
+    this.selectedYear = this._finalDate.getFullYear();
+    this.selectedHour = this._finalDate.getHours();;
+    this.selectedMinute = this._finalDate.getMinutes();
     console.log(this.selectedHour);
     //fix minutes to one of 00/15/30/45
     if(this.selectedMinute > 0 && this.selectedMinute <=14) {
@@ -58,45 +76,49 @@ export class DtpComponent implements OnInit {
 
   togglePicker() {
     this.showPicker = !this.showPicker;
+    if(this.showPicker === false) {
+      this.setDate();
+    }
   }
 
   public updateMonth(event): void {
     this.selectedMonth = event.target.value;
-    console.log("updated ", this.selectedMonth);
+    this.setDate();
   }
   public updateYear(event): void {
     this.selectedYear = event.target.value;
-    console.log("updated ", this.selectedYear);
+    this.setDate();
   }
   public updateDate(event): void {
     this.selectedDate = event.target.value;
-    console.log("updated ", this.selectedDate);
+    this.setDate();
   }
   public updateHour(event): void {
     this.selectedHour = event.target.value;
-    console.log("updated ", this.selectedHour);
+    this.setDate();
   }
   public updateMinutes(event): void {
     this.selectedMinute = event.target.value;
-    console.log("updated ", this.selectedMinute);
+    this.setDate();
   }
 
   setDate() {
     console.log("okay");
-    this.showPicker = !this.showPicker;
+    // this.showPicker = !this.showPicker;
     if(this.showDate && this.showTime) {
       //build date+time
-      this.selectedFinalDate =  new Date(this.selectedYear, this.selectedMonth, this.selectedDate, this.selectedHour, this.selectedMinute, 0);
-      console.log(this.selectedFinalDate);
+      this._finalDate =  new Date(this.selectedYear, this.selectedMonth, this.selectedDate, this.selectedHour, this.selectedMinute, 0);
+      console.log(this._finalDate);
     } else if(this.showDate && !this.showTime) {
       //build date
-      this.selectedFinalDate =  new Date(this.selectedYear, this.selectedMonth, this.selectedDate, 0, 0, 0);
-      console.log(this.selectedFinalDate);
+      this._finalDate =  new Date(this.selectedYear, this.selectedMonth, this.selectedDate, 0, 0, 0);
+      console.log(this._finalDate);
     } else if(!this.showDate && this.showTime) {
       //build time
-      this.selectedFinalDate =  new Date(this.selectedYear, this.selectedMonth, this.selectedDate, this.selectedHour, this.selectedMinute, 0);
-      console.log(this.selectedFinalDate);
+      this._finalDate =  new Date(this.selectedYear, this.selectedMonth, this.selectedDate, this.selectedHour, this.selectedMinute, 0);
+      console.log(this._finalDate);
     }
+    this.propagateChange(this._finalDate);
   }
 
 
