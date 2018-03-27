@@ -8,8 +8,9 @@ Once this is ready for production use, it will be published to npm for easy inte
 
 ## Steps to being Production-ready
 
-- [ ] Bind with external `formControlName` and `ngModel` [Current Reference link](https://blog.thoughtram.io/angular/2016/07/27/custom-form-controls-in-angular-2.html)
+- [x] Bind with external `formControlName` and `ngModel` [Current Reference link](https://blog.thoughtram.io/angular/2016/07/27/custom-form-controls-in-angular-2.html)
 - [ ] Support for editing date & time (Initialize with supplied value instead of default value if available)
+- [ ] Move <input> out of dtp template. Use another way to trigger the dtp.
 - [ ] Move the `dtp` to a module for making it exportable & reusable
 - [ ] Create npm package using `ng-packagr` [Current Reference link](https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e)
 
