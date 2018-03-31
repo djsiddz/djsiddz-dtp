@@ -6,7 +6,12 @@
   </div>
 </div>
 <div class="container">
-  <div class="row">
+  <div class="row mt-5">
+    <div class="col-12">
+      <p class="alert alert-info">You can use <code>&lt;djsiddz-dtp&gt;</code> for 'only date', 'only time' or 'date and time both' by just adding the <code>showDate</code> and <code>showTime</code> properties with true or false values as necessary.</p>
+    </div>
+  </div>
+  <div class="row mt-3">
     <div class="col-12 col-md-4">
       <div class="card">
         <div class="card-body">
@@ -32,6 +37,11 @@
       </div>
     </div>
   </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <p class="alert alert-info"><code>&lt;djsiddz-dtp&gt;</code> works with <code>ngModel</code> for now. And not with <code>formControlName</code>.</p>
+    </div>
+  </div>
   <div class="row mt-3">
     <div class="col-12 col-md-4">
       <div class="card">
@@ -39,9 +49,12 @@
           <h5 class="card-title">Using ngModel</h5>
           <djsiddz-dtp label="Both" [showDate]="true" [showTime]="true" [(ngModel)]="example1"></djsiddz-dtp>
         </div>
+        <div class="card-body">
+          {{ example1 | date:'h:mm a, MMM d, y'}}
+        </div>
       </div>
     </div>
-    <div class="col-12 col-md-4">
+    <!-- <div class="col-12 col-md-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Using formControlName</h5>
@@ -49,7 +62,10 @@
             <djsiddz-dtp label="Both" [showDate]="true" [showTime]="true" formControlName="example2"></djsiddz-dtp>
           </form>
         </div>
+        <div class="card-body">
+          {{ form.value | json }}
+        </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

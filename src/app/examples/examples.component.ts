@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+// import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'djsiddz-examples',
@@ -12,17 +12,17 @@ export class ExamplesComponent implements OnInit {
   // using ngModel example
   example1 = new Date(2017,1,5,10,30);
   // using formControlName example
-  // example2 = new Date(2017,1,5,10,30);
+  // example2: Date;
 
-  form: FormGroup;
+  // form: FormGroup;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      example2: new Date(2017,1,5,10,30)
-    });
+    // this.form =  new FormGroup({
+    //   example2: new FormControl(this.example1)
+    // });
   }
 
 }
